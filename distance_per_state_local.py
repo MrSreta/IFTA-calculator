@@ -12,6 +12,9 @@ Accepted coordinate formats:
     DMS with symbols:  37°11'59.9"N 85°56'05.8"W
     DMS with letters:  37d11m59.9sN 85d56m5.8sW
     Place name:        Charlotte, NC
+
+When running the first time it will create a .geojson file since this is made to run localy on your machine
+
 """
 
 import argparse
@@ -151,11 +154,6 @@ def parse_or_geocode(location: str) -> tuple[float, float]:
     time.sleep(1)   
     return lat, lng
 
-
-# ---------------------------------------------------------------------------
-# Routing — OSRM
-# ---------------------------------------------------------------------------
-
 def get_route_osrm(origin: tuple[float, float], destination: tuple[float, float]) -> dict:
 
     coords = f"{origin[1]},{origin[0]};{destination[1]},{destination[0]}"
@@ -242,11 +240,6 @@ def calculate_distance_per_state(
 
     print()
     return dict(state_km), state_order
-
-
-# ---------------------------------------------------------------------------
-# Output
-# ---------------------------------------------------------------------------
 
 STATE_ABBREV: dict[str, str] = {
     "Alabama": "US_AL", "Alaska": "US_AK", "Arizona": "US_AZ", "Arkansas": "US_AR",
